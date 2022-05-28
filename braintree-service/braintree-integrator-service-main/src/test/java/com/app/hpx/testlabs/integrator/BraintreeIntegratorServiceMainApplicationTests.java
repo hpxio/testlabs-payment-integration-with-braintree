@@ -1,4 +1,4 @@
-package com.app.hpx.testlabs.braintreeintegratorservicemain;
+package com.app.hpx.testlabs.integrator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

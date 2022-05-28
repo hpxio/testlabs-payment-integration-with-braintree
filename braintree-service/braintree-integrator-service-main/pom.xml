@@ -19,6 +19,7 @@
 	
 	<properties>
 		<java.version>1.8</java.version>
+		<braintree-java.version>3.16.0</braintree-java.version>
 	</properties>
 	
 	<dependencies>
@@ -41,6 +42,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.braintreepayments.gateway</groupId>
+			<artifactId>braintree-java</artifactId>
+			<version>${braintree-java.version}</version>
 		</dependency>
 	</dependencies>
 
