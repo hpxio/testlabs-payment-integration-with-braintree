@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.app.hpx.testlabs.integrator.config.BraintreeGatewayConfig;
+import com.app.hpx.testlabs.integrator.client.config.BraintreeGatewayConfig;
 import com.braintreegateway.Customer;
 import com.braintreegateway.CustomerRequest;
 import com.braintreegateway.PaymentMethod;
@@ -22,6 +22,7 @@ import com.braintreegateway.Result;
 import com.braintreegateway.Transaction;
 import com.braintreegateway.TransactionRequest;
 
+@Deprecated
 @Controller
 @RequestMapping("/app/braintree/instrument/v1")
 public class GenerateNonceController {

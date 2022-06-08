@@ -10,7 +10,6 @@
 
 	<packaging>jar</packaging>
 
-	<groupId>com.app.hpx.testlabs</groupId>
 	<artifactId>braintree-integrator-service-main</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
