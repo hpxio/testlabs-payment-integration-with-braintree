@@ -1,14 +1,18 @@
-package com.app.hpx.testlabs.integrator.client.model;
+package com.app.hpx.testlabs.integrator.model.request;
 
 import java.math.BigDecimal;
 
-public class TransactionSubmissionDetails {
+public class ChargeRequestDTO {
 
     private boolean settlementFlag;
 
     private String orderId;
+
     private String customerId;
+
     private String paymentMethod;
+
+    private String paymentNonce;
 
     private BigDecimal amount;
 
@@ -52,10 +56,18 @@ public class TransactionSubmissionDetails {
         this.amount = amount;
     }
 
+    public String getPaymentNonce() {
+        return paymentNonce;
+    }
+
+    public void setPaymentNonce(String paymentNonce) {
+        this.paymentNonce = paymentNonce;
+    }
+
     @Override
     public String toString() {
-        return "PaymentTransactionDetails{" + "settlementFlag=" + settlementFlag + ", orderId='" + orderId + '\''
-                   + ", customerId='" + customerId + '\'' + ", paymentMethod='" + paymentMethod + '\'' + ", amount="
-                   + amount + '}';
+        return "ChargeRequestDTO{" + "settlementFlag=" + settlementFlag + ", orderId='" + orderId + '\''
+                   + ", customerId='" + customerId + '\'' + ", paymentMethod='" + paymentMethod + '\''
+                   + ", paymentNonce='" + paymentNonce + '\'' + ", amount=" + amount + '}';
     }
 }

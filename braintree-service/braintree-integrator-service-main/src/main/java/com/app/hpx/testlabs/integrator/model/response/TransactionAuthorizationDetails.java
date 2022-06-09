@@ -1,22 +1,25 @@
-package com.app.hpx.testlabs.integrator.client.model;
-
-import com.braintreegateway.Transaction;
+package com.app.hpx.testlabs.integrator.model.response;
 
 public class TransactionAuthorizationDetails {
 
     private String transactionId;
+
     private String orderId;
 
     private String transactionStatus;
 
     private String networkTransactionId;
+
     private String authorizedTransactionId;
+
     private String processorResponseText;
+
     private String processorResponseCode;
 
     private String paymentInstrumentType;
 
     private String createdTimestamp;
+
     private String updatedTimestamp;
 
     public String getTransactionId() {

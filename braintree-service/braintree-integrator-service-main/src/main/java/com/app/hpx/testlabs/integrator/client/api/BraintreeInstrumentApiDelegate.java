@@ -2,18 +2,26 @@ package com.app.hpx.testlabs.integrator.client.api;
 
 import org.springframework.stereotype.Component;
 
+import com.app.hpx.testlabs.integrator.client.service.BraintreeInstrumentService;
+
 @Component
 public class BraintreeInstrumentApiDelegate {
 
-    void addInstrumentDelegate() {
+    private final BraintreeInstrumentService instrumentService;
 
+    public BraintreeInstrumentApiDelegate(BraintreeInstrumentService instrumentService) {
+        this.instrumentService = instrumentService;
     }
 
-    void updateInstrumentDelegate() {
-
+    public String addInstrumentDelegate(String customerId, String nonce) {
+        return instrumentService.addInstrument(customerId, nonce);
     }
 
-    void deleteInstrumentDelegate() {
+    public boolean updateInstrumentDelegate(String token) {
+        return instrumentService.deleteInstrument(token);
+    }
 
+    public boolean deleteInstrumentDelegate(String token) {
+        return instrumentService.checkIfDefaultInstrument(token);
     }
 }

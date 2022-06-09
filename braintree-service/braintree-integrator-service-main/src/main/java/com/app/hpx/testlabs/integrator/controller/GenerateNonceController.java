@@ -100,6 +100,12 @@ public class GenerateNonceController {
             Result<Transaction> salesResult =
                 braintreeGatewayConfig.getBraintreeGatewayInstance().transaction().sale(transactionRequest);
 
+            String id = salesResult.getTransaction().getId();
+            braintreeGatewayConfig.getBraintreeGatewayInstance().transaction().refund(id);
+
+            /*String orderId = salesResult.getTarget().getOrderId();*/
+
+
             if (salesResult.isSuccess()) {
                 LOG.info("Sales successful : {}-{}",
                     salesResult.getTarget().getProcessorAuthorizationCode(),

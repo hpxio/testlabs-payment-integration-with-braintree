@@ -1,8 +1,6 @@
-package com.app.hpx.testlabs.integrator.client.model.response;
+package com.app.hpx.testlabs.integrator.model.response;
 
-import com.app.hpx.testlabs.integrator.client.model.TransactionAuthorizationDetails;
-
-public class TransactionAuthorizationResponse {
+public class ChargeResponseDTO {
 
     private TransactionAuthorizationDetails transactionAuthorizationDetails;
 
@@ -12,5 +10,10 @@ public class TransactionAuthorizationResponse {
 
     public void setTransactionAuthorizationDetails(TransactionAuthorizationDetails transactionAuthorizationDetails) {
         this.transactionAuthorizationDetails = transactionAuthorizationDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "ChargeResponseDTO{" + "transactionAuthorizationDetails=" + transactionAuthorizationDetails + '}';
     }
 }

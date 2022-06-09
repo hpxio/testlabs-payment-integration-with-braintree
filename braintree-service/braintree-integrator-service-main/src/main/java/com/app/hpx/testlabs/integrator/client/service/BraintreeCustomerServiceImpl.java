@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.app.hpx.testlabs.integrator.client.config.BraintreeGatewayConfig;
+import com.app.hpx.testlabs.integrator.client.model.request.CreateCustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.request.UpdateCustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.response.builder.BraintreeServiceResponseBuilder;
+import com.app.hpx.testlabs.integrator.model.response.GetCustomerResponseDTO;
+
 import com.braintreegateway.BraintreeGateway;
 import com.braintreegateway.Customer;
-import com.braintreegateway.CustomerRequest;
 import com.braintreegateway.Result;
 import com.braintreegateway.exceptions.NotFoundException;
 
@@ -19,15 +23,19 @@ public class BraintreeCustomerServiceImpl implements BraintreeCustomerService {
 
     private final BraintreeGatewayConfig gatewayConfig;
 
+    private final BraintreeServiceResponseBuilder<Customer, GetCustomerResponseDTO> getCustomerResponseBuilder;
+
     @Autowired
-    public BraintreeCustomerServiceImpl(BraintreeGatewayConfig gateway) {
+    public BraintreeCustomerServiceImpl(BraintreeGatewayConfig gateway,
+        BraintreeServiceResponseBuilder<Customer, GetCustomerResponseDTO> getCustomerResponseBuilder) {
         this.gatewayConfig = gateway;
+        this.getCustomerResponseBuilder = getCustomerResponseBuilder;
     }
 
     @Override
-    public String createCustomer(CustomerRequest customerRequest) {
+    public String createCustomer(CreateCustomerRequest request) {
         BraintreeGateway gatewayInstance = gatewayConfig.getBraintreeGatewayInstance();
-        Result<Customer> createCustomerResult = gatewayInstance.customer().create(customerRequest);
+        Result<Customer> createCustomerResult = gatewayInstance.customer().create(request.getCustomerRequest());
 
         if (createCustomerResult.isSuccess()) {
             Customer resultTarget = createCustomerResult.getTarget();
@@ -39,9 +47,12 @@ public class BraintreeCustomerServiceImpl implements BraintreeCustomerService {
     }
 
     @Override
-    public String updateCustomer(String customerId, CustomerRequest customerRequest) {
+    public String updateCustomer(UpdateCustomerRequest request) {
         BraintreeGateway gatewayInstance = gatewayConfig.getBraintreeGatewayInstance();
-        Result<Customer> updateCustomerResult = gatewayInstance.customer().update(customerId, customerRequest);
+        Result<Customer> updateCustomerResult =
+            gatewayInstance.customer()
+                .update(request.getCustomerId(),
+                    request.getCustomerRequest());
 
         if (updateCustomerResult.isSuccess()) {
             Customer resultTarget = updateCustomerResult.getTarget();
@@ -74,15 +85,14 @@ public class BraintreeCustomerServiceImpl implements BraintreeCustomerService {
     }
 
     @Override
-    public Customer getCustomer(String customerId) {
+    public GetCustomerResponseDTO getCustomer(String customerId) {
         BraintreeGateway gatewayInstance = gatewayConfig.getBraintreeGatewayInstance();
-
         try {
             /* check if the customer with given ID exists */
             Customer customer = gatewayInstance.customer().find(customerId);
             LOG.info("Customer found, created on : {}", customer.getCreatedAt());
 
-            return customer;
+            return getCustomerResponseBuilder.build(customer);
         } catch (NotFoundException nfe) {
             /* TODO : throw customer-search application exception here */
             throw new RuntimeException("Customer with given ID not found");

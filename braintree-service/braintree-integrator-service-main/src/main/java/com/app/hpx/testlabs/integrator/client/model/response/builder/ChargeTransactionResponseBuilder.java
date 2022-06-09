@@ -2,18 +2,19 @@ package com.app.hpx.testlabs.integrator.client.model.response.builder;
 
 import org.springframework.stereotype.Component;
 
-import com.app.hpx.testlabs.integrator.client.model.TransactionAuthorizationDetails;
-import com.app.hpx.testlabs.integrator.client.model.response.TransactionAuthorizationResponse;
 import com.braintreegateway.Transaction;
+
+import com.app.hpx.testlabs.integrator.model.response.ChargeResponseDTO;
+import com.app.hpx.testlabs.integrator.model.response.TransactionAuthorizationDetails;
 
 @Component
 public class ChargeTransactionResponseBuilder
-    implements BraintreeServiceResponseBuilder<Transaction, TransactionAuthorizationResponse> {
+    implements BraintreeServiceResponseBuilder<Transaction, ChargeResponseDTO> {
 
     @Override
-    public TransactionAuthorizationResponse build(Transaction request) {
+    public ChargeResponseDTO build(Transaction request) {
 
-        TransactionAuthorizationResponse transactionResponse = new TransactionAuthorizationResponse();
+        ChargeResponseDTO chargeResponseDTO = new ChargeResponseDTO();
         TransactionAuthorizationDetails authorizationDetails = new TransactionAuthorizationDetails();
 
         authorizationDetails.setTransactionId(request.getId());
@@ -33,7 +34,7 @@ public class ChargeTransactionResponseBuilder
         authorizationDetails.setCreatedTimestamp(String.valueOf(request.getCreatedAt().getTimeInMillis()));
         authorizationDetails.setUpdatedTimestamp(String.valueOf(request.getUpdatedAt().getTimeInMillis()));
 
-        transactionResponse.setTransactionAuthorizationDetails(authorizationDetails);
-        return transactionResponse;
+        chargeResponseDTO.setTransactionAuthorizationDetails(authorizationDetails);
+        return chargeResponseDTO;
     }
 }

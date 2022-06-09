@@ -1,16 +1,21 @@
 package com.app.hpx.testlabs.integrator.client.model.request;
 
-import com.app.hpx.testlabs.integrator.client.model.TransactionSubmissionDetails;
+import com.braintreegateway.TransactionRequest;
 
 public class ChargeTransactionRequest {
 
-    private TransactionSubmissionDetails transactionSubmissionDetails;
+    private TransactionRequest transactionRequest;
 
-    public TransactionSubmissionDetails getPaymentTransactionDetails() {
-        return transactionSubmissionDetails;
+    public TransactionRequest getTransactionRequest() {
+        return transactionRequest;
     }
 
-    public void setPaymentTransactionDetails(TransactionSubmissionDetails transactionSubmissionDetails) {
-        this.transactionSubmissionDetails = transactionSubmissionDetails;
+    public void setTransactionRequest(TransactionRequest transactionRequest) {
+        this.transactionRequest = transactionRequest;
+    }
+
+    @Override
+    public String toString() {
+        return "ChargeTransactionRequest{" + "transactionRequest=" + transactionRequest + '}';
     }
 }

@@ -1,16 +1,17 @@
 package com.app.hpx.testlabs.integrator.client.service;
 
-import com.braintreegateway.Customer;
-import com.braintreegateway.CustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.request.CreateCustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.request.UpdateCustomerRequest;
+import com.app.hpx.testlabs.integrator.model.response.GetCustomerResponseDTO;
 
 public interface BraintreeCustomerService {
 
-    String createCustomer(CustomerRequest customerRequest);
+    String createCustomer(CreateCustomerRequest request);
 
-    String updateCustomer(String customerId, CustomerRequest customerRequest);
+    String updateCustomer(UpdateCustomerRequest request);
 
     boolean removeCustomer(String customerId);
 
-    Customer getCustomer(String customerId);
+    GetCustomerResponseDTO getCustomer(String customerId);
 
 }

@@ -47,6 +47,12 @@
 			<artifactId>braintree-java</artifactId>
 			<version>${braintree-java.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.app.hpx.testlabs</groupId>
+			<artifactId>braintree-interface-main</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -5,14 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.app.hpx.testlabs.integrator.client.config.BraintreeGatewayConfig;
-import com.app.hpx.testlabs.integrator.client.model.request.ChargeTransactionRequest;
-import com.app.hpx.testlabs.integrator.client.model.response.TransactionAuthorizationResponse;
-import com.app.hpx.testlabs.integrator.client.model.response.builder.BraintreeServiceResponseBuilder;
 import com.braintreegateway.BraintreeGateway;
 import com.braintreegateway.Result;
 import com.braintreegateway.Transaction;
-import com.braintreegateway.TransactionRequest;
+
+import com.app.hpx.testlabs.integrator.client.config.BraintreeGatewayConfig;
+import com.app.hpx.testlabs.integrator.client.model.request.ChargeTransactionRequest;
+import com.app.hpx.testlabs.integrator.client.model.response.builder.BraintreeServiceResponseBuilder;
+import com.app.hpx.testlabs.integrator.model.response.ChargeResponseDTO;
 
 @Component
 public class BraintreeTransactionServiceImpl implements BraintreeTransactionService{
@@ -21,23 +21,21 @@ public class BraintreeTransactionServiceImpl implements BraintreeTransactionServ
 
     private final BraintreeGatewayConfig gatewayConfig;
 
-    private final BraintreeServiceResponseBuilder<Transaction, TransactionAuthorizationResponse> responseBuilder;
+    private final BraintreeServiceResponseBuilder<Transaction, ChargeResponseDTO> responseBuilder;
 
     @Autowired
-    public BraintreeTransactionServiceImpl(
-        BraintreeGatewayConfig gatewayConfig,
-        BraintreeServiceResponseBuilder<Transaction, TransactionAuthorizationResponse> responseBuilder
-    ) {
+    public BraintreeTransactionServiceImpl(BraintreeGatewayConfig gatewayConfig,
+        BraintreeServiceResponseBuilder<Transaction, ChargeResponseDTO> responseBuilder) {
         this.gatewayConfig = gatewayConfig;
         this.responseBuilder = responseBuilder;
     }
 
     @Override
-    public TransactionAuthorizationResponse chargeTransaction(ChargeTransactionRequest chargeRequest) {
+    public ChargeResponseDTO chargeTransaction(ChargeTransactionRequest chargeRequest) {
         BraintreeGateway gatewayInstance = gatewayConfig.getBraintreeGatewayInstance();
 
-        TransactionRequest transactionRequest = generateTransactionRequest(chargeRequest);
-        Result<Transaction> chargeTransactionResult = gatewayInstance.transaction().sale(transactionRequest);
+        Result<Transaction> chargeTransactionResult =
+            gatewayInstance.transaction().sale(chargeRequest.getTransactionRequest());
 
         if(chargeTransactionResult.isSuccess()){
             return responseBuilder.build(chargeTransactionResult.getTransaction());
@@ -65,19 +63,5 @@ public class BraintreeTransactionServiceImpl implements BraintreeTransactionServ
     @Override
     public void captureTransactions() {
 
-    }
-
-    private TransactionRequest generateTransactionRequest(ChargeTransactionRequest chargeRequest) {
-        TransactionRequest transactionRequest = new TransactionRequest();
-
-        transactionRequest.amount(chargeRequest.getPaymentTransactionDetails().getAmount());
-        transactionRequest.orderId(chargeRequest.getPaymentTransactionDetails().getOrderId());
-
-        transactionRequest.customerId(chargeRequest.getPaymentTransactionDetails().getCustomerId());
-
-        transactionRequest.paymentMethodToken(chargeRequest.getPaymentTransactionDetails().getPaymentMethod());
-        transactionRequest.options().submitForSettlement(chargeRequest.getPaymentTransactionDetails().isSettlementFlag());
-
-        return transactionRequest;
     }
 }

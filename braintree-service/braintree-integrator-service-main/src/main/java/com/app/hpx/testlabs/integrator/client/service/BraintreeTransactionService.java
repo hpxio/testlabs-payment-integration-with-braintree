@@ -1,11 +1,11 @@
 package com.app.hpx.testlabs.integrator.client.service;
 
 import com.app.hpx.testlabs.integrator.client.model.request.ChargeTransactionRequest;
-import com.app.hpx.testlabs.integrator.client.model.response.TransactionAuthorizationResponse;
+import com.app.hpx.testlabs.integrator.model.response.ChargeResponseDTO;
 
-interface BraintreeTransactionService {
+public interface BraintreeTransactionService {
 
-    TransactionAuthorizationResponse chargeTransaction(ChargeTransactionRequest chargeRequest);
+    ChargeResponseDTO chargeTransaction(ChargeTransactionRequest chargeRequest);
 
     void refundTransaction();
 

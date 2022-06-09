@@ -38,5 +38,6 @@
         <module>braintree-eus-main</module>
         <module>braintree-integrator-service-it</module>
         <module>braintree-integrator-service-main</module>
+        <module>braintree-interface-main</module>
     </modules>
 </project>
