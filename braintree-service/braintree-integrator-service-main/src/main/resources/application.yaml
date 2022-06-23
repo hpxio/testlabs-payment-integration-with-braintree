@@ -1,0 +1,13 @@
+server:
+  port: 8889
+
+spring:
+  application:
+    name: braintree-integrator-service
+
+braintree:
+  gateway:
+    environment: sandbox
+    merchant-id: sgs9c46s2qzwh9t6
+    public-key: 55k7dzwnghpmmfnh
+    private-key: 1cc33f8670b592a31ddb2804c5b2ba1b
