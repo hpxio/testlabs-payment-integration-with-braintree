@@ -4,17 +4,17 @@ import org.springframework.stereotype.Component;
 
 import com.braintreegateway.CustomerRequest;
 
-import com.app.hpx.testlabs.integrator.client.model.request.CreateCustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.request.CreateBraintreeCustomerRequest;
 import com.app.hpx.testlabs.integrator.model.CustomerDetailsModel;
 import com.app.hpx.testlabs.integrator.model.request.CreateCustomerRequestDTO;
 
 @Component
-public class CreateCustomerRequestBuilder implements
-    BraintreeServiceRequestBuilder<CreateCustomerRequestDTO, CreateCustomerRequest> {
+public class CreateBraintreeCustomerRequestBuilder implements
+    BraintreeServiceRequestBuilder<CreateCustomerRequestDTO, CreateBraintreeCustomerRequest> {
 
     @Override
-    public CreateCustomerRequest build(CreateCustomerRequestDTO request) {
-        CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest();
+    public CreateBraintreeCustomerRequest build(CreateCustomerRequestDTO request) {
+        CreateBraintreeCustomerRequest createBraintreeCustomerRequest = new CreateBraintreeCustomerRequest();
         CustomerRequest customerRequest = new CustomerRequest();
 
         CustomerDetailsModel customerDetailsModel = request.getCustomerDetailsModel();
@@ -25,8 +25,8 @@ public class CreateCustomerRequestBuilder implements
             .email(customerDetailsModel.getEmailAddress())
             .phone(customerDetailsModel.getContactNumber());
 
-        createCustomerRequest.setCustomerRequest(customerRequest);
+        createBraintreeCustomerRequest.setCustomerRequest(customerRequest);
 
-        return createCustomerRequest;
+        return createBraintreeCustomerRequest;
     }
 }

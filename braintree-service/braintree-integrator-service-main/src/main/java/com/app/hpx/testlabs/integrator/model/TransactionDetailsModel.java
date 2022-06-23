@@ -1,6 +1,6 @@
-package com.app.hpx.testlabs.integrator.model.response;
+package com.app.hpx.testlabs.integrator.model;
 
-public class TransactionAuthorizationDetails {
+public class TransactionDetailsModel {
 
     private String transactionId;
 

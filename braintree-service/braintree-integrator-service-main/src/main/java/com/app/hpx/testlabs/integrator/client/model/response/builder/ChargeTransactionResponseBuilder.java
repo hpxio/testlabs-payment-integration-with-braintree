@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.braintreegateway.Transaction;
 
 import com.app.hpx.testlabs.integrator.model.response.ChargeResponseDTO;
-import com.app.hpx.testlabs.integrator.model.response.TransactionAuthorizationDetails;
+import com.app.hpx.testlabs.integrator.model.TransactionDetailsModel;
 
 @Component
 public class ChargeTransactionResponseBuilder
@@ -15,7 +15,7 @@ public class ChargeTransactionResponseBuilder
     public ChargeResponseDTO build(Transaction request) {
 
         ChargeResponseDTO chargeResponseDTO = new ChargeResponseDTO();
-        TransactionAuthorizationDetails authorizationDetails = new TransactionAuthorizationDetails();
+        TransactionDetailsModel authorizationDetails = new TransactionDetailsModel();
 
         authorizationDetails.setTransactionId(request.getId());
         authorizationDetails.setOrderId(request.getOrderId());

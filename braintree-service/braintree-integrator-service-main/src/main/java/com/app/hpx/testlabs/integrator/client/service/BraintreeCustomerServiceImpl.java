@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.app.hpx.testlabs.integrator.client.config.BraintreeGatewayConfig;
-import com.app.hpx.testlabs.integrator.client.model.request.CreateCustomerRequest;
-import com.app.hpx.testlabs.integrator.client.model.request.UpdateCustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.request.CreateBraintreeCustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.request.UpdateBraintreeCustomerRequest;
 import com.app.hpx.testlabs.integrator.client.model.response.builder.BraintreeServiceResponseBuilder;
 import com.app.hpx.testlabs.integrator.model.response.GetCustomerResponseDTO;
 
@@ -33,13 +33,12 @@ public class BraintreeCustomerServiceImpl implements BraintreeCustomerService {
     }
 
     @Override
-    public String createCustomer(CreateCustomerRequest request) {
+    public GetCustomerResponseDTO createCustomer(CreateBraintreeCustomerRequest request) {
         BraintreeGateway gatewayInstance = gatewayConfig.getBraintreeGatewayInstance();
         Result<Customer> createCustomerResult = gatewayInstance.customer().create(request.getCustomerRequest());
 
         if (createCustomerResult.isSuccess()) {
-            Customer resultTarget = createCustomerResult.getTarget();
-            return resultTarget.getId();
+            return getCustomerResponseBuilder.build(createCustomerResult.getTarget());
         } else {
             /* TODO : throw customer-creation application exception here */
             throw new RuntimeException("Error occurred while creating customer!");
@@ -47,7 +46,7 @@ public class BraintreeCustomerServiceImpl implements BraintreeCustomerService {
     }
 
     @Override
-    public String updateCustomer(UpdateCustomerRequest request) {
+    public String updateCustomer(UpdateBraintreeCustomerRequest request) {
         BraintreeGateway gatewayInstance = gatewayConfig.getBraintreeGatewayInstance();
         Result<Customer> updateCustomerResult =
             gatewayInstance.customer()

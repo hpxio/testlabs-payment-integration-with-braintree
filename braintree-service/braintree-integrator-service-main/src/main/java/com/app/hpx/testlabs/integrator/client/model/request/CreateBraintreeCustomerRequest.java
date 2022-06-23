@@ -2,7 +2,7 @@ package com.app.hpx.testlabs.integrator.client.model.request;
 
 import com.braintreegateway.CustomerRequest;
 
-public class CreateCustomerRequest {
+public class CreateBraintreeCustomerRequest {
 
     private CustomerRequest customerRequest;
 

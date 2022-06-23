@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.app.hpx.testlabs.integrator.client.config.BraintreeGatewayConfig;
 import com.braintreegateway.BraintreeGateway;
+import com.braintreegateway.Customer;
 import com.braintreegateway.PaymentMethod;
 import com.braintreegateway.PaymentMethodRequest;
 import com.braintreegateway.Result;
@@ -28,6 +29,13 @@ public class BraintreeInstrumentServiceImpl implements BraintreeInstrumentServic
     public String addInstrument(String customerId, String paymentNonce) {
         BraintreeGateway gatewayInstance = gatewayConfig.getBraintreeGatewayInstance();
 
+        try {
+            gatewayInstance.customer().find(customerId);
+        } catch (NotFoundException nfe){
+            /* TODO : throw instrument-onboarding application exception here */
+            throw new RuntimeException("Customer does not exist!");
+        }
+
         /* create minimal instrument onboarding request */
         PaymentMethodRequest paymentMethodRequest = new PaymentMethodRequest();
         paymentMethodRequest.customerId(customerId);
@@ -43,7 +51,6 @@ public class BraintreeInstrumentServiceImpl implements BraintreeInstrumentServic
             /* TODO : throw instrument-onboarding application exception here */
             throw new RuntimeException("Error occurred during instrument onboarding!");
         }
-
     }
 
     @Override

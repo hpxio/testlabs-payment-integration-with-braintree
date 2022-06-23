@@ -3,8 +3,8 @@ package com.app.hpx.testlabs.integrator.client.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.app.hpx.testlabs.integrator.client.model.request.CreateCustomerRequest;
-import com.app.hpx.testlabs.integrator.client.model.request.UpdateCustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.request.CreateBraintreeCustomerRequest;
+import com.app.hpx.testlabs.integrator.client.model.request.UpdateBraintreeCustomerRequest;
 import com.app.hpx.testlabs.integrator.client.service.BraintreeCustomerService;
 import com.app.hpx.testlabs.integrator.model.response.GetCustomerResponseDTO;
 
@@ -18,12 +18,12 @@ public class BraintreeCustomerApiDelegate {
         this.customerService = customerService;
     }
 
-    public String createCustomerDelegate(CreateCustomerRequest request) {
+    public GetCustomerResponseDTO createCustomerDelegate(CreateBraintreeCustomerRequest request) {
         return customerService.createCustomer(request);
     }
 
 
-    public String updateCustomerDelegate(UpdateCustomerRequest request) {
+    public String updateCustomerDelegate(UpdateBraintreeCustomerRequest request) {
         return customerService.updateCustomer(request);
     }
 

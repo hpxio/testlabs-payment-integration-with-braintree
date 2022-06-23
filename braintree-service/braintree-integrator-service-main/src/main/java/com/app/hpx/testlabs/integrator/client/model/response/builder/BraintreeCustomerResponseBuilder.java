@@ -8,7 +8,7 @@ import com.app.hpx.testlabs.integrator.model.CustomerDetailsModel;
 import com.app.hpx.testlabs.integrator.model.response.GetCustomerResponseDTO;
 
 @Component
-public class GetCustomerResponseBuilder
+public class BraintreeCustomerResponseBuilder
     implements BraintreeServiceResponseBuilder<Customer, GetCustomerResponseDTO> {
 
     @Override
