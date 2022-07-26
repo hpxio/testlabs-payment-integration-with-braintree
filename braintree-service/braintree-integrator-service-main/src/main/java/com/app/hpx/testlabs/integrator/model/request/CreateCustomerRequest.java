@@ -1,70 +1,63 @@
 package com.app.hpx.testlabs.integrator.model.request;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CreateCustomerRequest {
+	@JsonProperty("first_name")
+	private String firstName;
 
-    @NotBlank(message = "Customer's First-name is mandatory!")
-    @JsonProperty(value = "first_name")
-    private String firstName;
+	@JsonProperty("last_name")
+	private String lastName;
 
-    @NotBlank(message = "Customer's Last-name is mandatory!")
-    @JsonProperty(value = "last_name")
-    private String lastName;
+	@JsonProperty("email")
+	private String email;
 
-    @Email(message = "Customer's Email-address format is invalid!")
-    @JsonProperty(value = "email_address")
-    private String emailAddress;
+	@JsonProperty("contact")
+	private String contact;
 
-    @JsonProperty(value = "contact_number")
-    private String contactNumber;
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public CreateCustomerRequest() {
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public CreateCustomerRequest(String firstName, String lastName, String emailAddress, String contactNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.contactNumber = contactNumber;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public String getContact() {
+		return contact;
+	}
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
+	@Override
+	public String toString() {
+		return "CreateCustomerRequest{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", email='" + email + '\'' +
+				", contact='" + contact + '\'' +
+				'}';
+	}
 }
