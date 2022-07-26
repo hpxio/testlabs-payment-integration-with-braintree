@@ -1,5 +1,7 @@
 package com.app.hpx.testlabs.integrator.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.hpx.testlabs.integrator.model.request.CreateCustomerRequest;
+import com.app.hpx.testlabs.integrator.model.response.CreateCustomerResponse;
 import com.app.hpx.testlabs.integrator.service.CustomerService;
 
 @RestController
@@ -24,7 +27,7 @@ public class CustomerController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public String createCustomer(@RequestBody CreateCustomerRequest request){
+	public CreateCustomerResponse createCustomer(@RequestBody @Valid CreateCustomerRequest request) {
 		return customerService.createCustomer(request);
 	}
 }

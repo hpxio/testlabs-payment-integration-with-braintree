@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.app.hpx.testlabs.integrator.client.model.request.CreateBraintreeCustomerRequest;
 import com.app.hpx.testlabs.integrator.model.request.CreateCustomerRequest;
+import com.braintreegateway.CustomerRequest;
 
 @Component
 public class CreateBraintreeCustomerRequestBuilder implements
@@ -11,6 +12,16 @@ public class CreateBraintreeCustomerRequestBuilder implements
 
 	@Override
 	public CreateBraintreeCustomerRequest build(CreateCustomerRequest request) {
-		return null;
+		CreateBraintreeCustomerRequest braintreeRequest = new CreateBraintreeCustomerRequest();
+		CustomerRequest customerDetails = new CustomerRequest();
+
+		customerDetails
+				.firstName(request.getFirstName())
+				.lastName(request.getLastName())
+				.phone(request.getContact())
+				.email(request.getEmail());
+
+		braintreeRequest.setCustomerRequest(customerDetails);
+		return braintreeRequest;
 	}
 }
